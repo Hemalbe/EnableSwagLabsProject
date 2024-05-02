@@ -25,7 +25,7 @@ public class Base {
 
         prop = new Properties();
         try {
-            FileInputStream fis = new FileInputStream(("/Users/hemalathaa/Desktop/HemaWorkSpace/EnableSwagLabsProject/src/main/java/com/swaglabs/qa/config/config.properties"));
+            FileInputStream fis = new FileInputStream(("/Users/hemalathaa/Desktop/EnableSwagLabsProject/src/main/java/com/swaglabs/qa/config/config.properties"));
             prop.load(fis);
         } catch (Throwable e) {
             e.printStackTrace();
@@ -33,11 +33,12 @@ public class Base {
 
         dataProp = new Properties();
         try {
-            FileInputStream datafis = new FileInputStream(("/Users/hemalathaa/Desktop/HemaWorkSpace/EnableSwagLabsProject/src/main/java/com/swaglabs/qa/testdata/testdata.properties"));
+            FileInputStream datafis = new FileInputStream(("/Users/hemalathaa/Desktop/EnableSwagLabsProject/src/main/java/com/swaglabs/qa/testdata/testdata.properties"));
             dataProp.load(datafis);
         } catch (Throwable e) {
             e.printStackTrace();
         }
+
 
     }
 
@@ -57,9 +58,9 @@ public class Base {
     private WebDriver initializeBrowser(String browserName) {
         WebDriver driver;
         if (browserName.equals("chrome")) {
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless=new");
-            driver = new ChromeDriver(options);
+//            ChromeOptions options = new ChromeOptions();
+//            options.addArguments("--headless=new");
+            driver = new ChromeDriver();
         } else if (browserName.equals("firefox")) {
             driver = new FirefoxDriver();
         } else if (browserName.equals("safari")) {

@@ -12,6 +12,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!--    <browserProperty>Chrome</browserProperty>-->
   </properties>
 
   <dependencies>
@@ -95,6 +96,9 @@
       <artifactId>maven-surefire-plugin</artifactId>
       <version>3.2.2</version>
       <configuration>
+<!--        <systemPropertyVariables>-->
+<!--          <browserProperty>${browserProperty}</browserProperty>-->
+<!--        </systemPropertyVariables>-->
         <suiteXmlFiles>
           <suiteXmlFile>/Users/hemalathaa/Desktop/HemaWorkSpace/EnableSwagLabsProject/testing.xml</suiteXmlFile>
         </suiteXmlFiles>

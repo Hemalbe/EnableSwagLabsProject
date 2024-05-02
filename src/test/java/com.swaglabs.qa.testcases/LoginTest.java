@@ -8,13 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends Base {
     // to load the properties we need to add constructor
@@ -41,32 +35,13 @@ public class LoginTest extends Base {
     }
 
     // Adding the priority we set the test case order else it will run with an alphabetical order.
-    @Test(priority = 1, dataProvider = "ValidCredentialsSupplier", invocationCount = 2, dataProviderClass = Utilities.class)
-    public void verifyLoginWithValidCredentials(String username, String password) {
+    @Test(priority = 1, dataProvider = "ValidCredentialsSupplier", invocationCount = 1, dataProviderClass = Utilities.class )
+    public void verifyLoginWithValidCredentials(String username, String password)throws InterruptedException {
         homePage = loginPage.Login(username, password);
         Assert.assertTrue(homePage.getDisplayStatusOfHomePageAppLogo(), "HomePage App logo is not visible");
     }
 
-//    public void verifyLoginWithValidCredentials(String username, String password) {
-//        loginPage.enterUsername(username);
-//        loginPage.enterPassword(password);
-//        loginPage.clickLoginButton();
-//        driver.findElement(By.id("user-name")).sendKeys(username);
-//        driver.findElement(By.id("password")).sendKeys(password);
-//        driver.findElement(By.id("login-button")).click();
-//        Assert.assertTrue(loginPage.isAppLogoDisplyed(),"App logo is not visible");
-//
-//    }
-
-    //    @DataProvider(name="ValidCredentialsSupplier")
-//    public Object[][] supplyTestData(){
-//        Object[][] data ={{"problem_user","secret_sauce"},
-//                    {"problem_user","secret_sauce"},
-//                    {"problem_user","secret_sauce"},
-//                    {"performance_glitch_user", "secret_sauce"}};
-//        return data;
-//    }
-
+//    @Test(priority = 2,groups = {"endtoend"})
     @Test(priority = 2)
     public void verifyLoginWithInValidCredentials() throws InterruptedException {
         loginPage.Login(dataProp.getProperty("InvalidUserName"), dataProp.getProperty("InvalidPassword"));
@@ -86,6 +61,7 @@ public class LoginTest extends Base {
     @Test(priority = 4)
     public void verifyLoginWithValidUsernameAndInValidPassword() throws InterruptedException {
         loginPage.Login(prop.getProperty("SValidUserName"), dataProp.getProperty("InvalidPassword"));
+        System.out.println("ValidName"+prop.getProperty("SValidUserName"));
         String actualWarningMessage = loginPage.retrieveUsernamePasswordNotMatchingWarningText();
         String expectedWarningMessage = dataProp.getProperty("EmailPasswordNoMatchWarningMessage");
         Assert.assertTrue(actualWarningMessage.contains(expectedWarningMessage), "Expected warning message is not displyed");
@@ -100,14 +76,15 @@ public class LoginTest extends Base {
     }
 
     @Test(priority = 6)
-    public void verifyLoginUsingKeyBoardTabs() {
+    public void verifyLoginUsingKeyBoardTabs() throws InterruptedException{
         homePage = loginPage.loginUsingKeyboardTabs(prop.getProperty("SValidUserName"), prop.getProperty("SValidPassword"));
         Assert.assertTrue(homePage.getDisplayStatusOfHomePageAppLogo(), "HomePage App logo is not visible");
     }
 
     @Test(priority = 7)
-    public void verifyLoginPlaceHolderAreDisplayed() {
-        loginPage.placeHolderValuesAreDisplayed();
+    public void verifyLoginPlaceHolderAreDisplayed()throws InterruptedException {
+        Assert.assertTrue(loginPage.placeHolderValuesAreDisplayed(),"The Place holder values are displyed");
+
     }
 
     @Test(priority = 8)
@@ -139,8 +116,8 @@ public class LoginTest extends Base {
         String expectedPageTitle = dataProp.getProperty("PageTitle");
         String actualPageURL = loginPage.retrieveLoginPageURL();
         String expectedPageURL = dataProp.getProperty("LoginPageURL");
-        Assert.assertEquals(actualPageTitle,expectedPageTitle,"Expected page title is missing");
-        Assert.assertEquals(actualPageURL,expectedPageURL, "Expected page URL is missing");
+        Assert.assertEquals(actualPageTitle, expectedPageTitle, "Expected page title is missing");
+        Assert.assertEquals(actualPageURL, expectedPageURL, "Expected page URL is missing");
     }
 
 //    @Test(priority = 11)

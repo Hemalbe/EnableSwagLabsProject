@@ -5,6 +5,11 @@
         <listener class-name="com.swaglabs.qa.listeners.MyListeners" />
     </listeners>
     <test name="EnableSwagTests">
+<!--        <groups>-->
+<!--            <run>-->
+<!--                <include name="endtoend"/>-->
+<!--            </run>-->
+<!--        </groups>-->
         <classes>
             <class name="com.swaglabs.qa.testcases.LoginTest"/>
             <class name="com.swaglabs.qa.testcases.LogoutTest"/>

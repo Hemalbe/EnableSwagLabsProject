@@ -11,48 +11,36 @@ public class LoginPage {
 
     WebDriver driver;
     //objects
-    @FindBy(id="user-name")
-    private WebElement usernameFeild;
+    @FindBy(id = "user-name")
+    private WebElement usernameField;
 
-    @FindBy(id="password")
-    private WebElement passwordFeild;
+    @FindBy(id = "password")
+    private WebElement passwordField;
 
-    @FindBy(id="login-button")
+    @FindBy(id = "login-button")
     private WebElement loginButton;
 
-    @FindBy(xpath="//div[@class=\"error-message-container error\"]/h3")
+    @FindBy(xpath = "//div[@class='error-message-container error']/h3")
     private WebElement usernamePasswordNotMatchingWarning;
 
-    @FindBy(xpath="//div[@class=\"login_logo\"]")
+    @FindBy(xpath = "//div[@class='login_logo']")
     private WebElement loginPageLogo;
 
-    @FindBy(css="input[placeholder=\"Username\"]")
+    @FindBy(css = "input[placeholder='Username']")
     private WebElement usernamePlaceholder;
 
-    @FindBy(css="input[placeholder=\"Password\"]")
+    @FindBy(css = "input[placeholder='Password']")
     private WebElement passwordPlaceholder;
 
-    @FindBy(xpath="//button[@class='error-button']//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]")
+    @FindBy(xpath = "//button[@class='error-button']//*[name()='svg']//*[name()='path' and contains(@fill,'currentCol')]")
     private WebElement errorCloseButton;
 
 
-    public LoginPage(WebDriver driver){
-        this.driver =driver;
-        PageFactory.initElements(driver,this);
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
     //Actions
-
-    public void enterUsername(String username) {
-
-        usernameFeild.sendKeys(username);
-
-    }
-
-    public void enterPassword(String password) {
-
-        passwordFeild.sendKeys(password);
-
-    }
 
     public HomePage clickLoginButton() {
         loginButton.click();
@@ -61,14 +49,15 @@ public class LoginPage {
 
     public String retrieveUsernamePasswordNotMatchingWarningText() {
 
-       String warningText=usernamePasswordNotMatchingWarning.getText();
-       return warningText;
+        String warningText = usernamePasswordNotMatchingWarning.getText();
+        return warningText;
 
     }
 
     public HomePage Login(String username, String password) {
-        usernameFeild.sendKeys(username);
-        passwordFeild.sendKeys(password);
+        usernameField.sendKeys(username);
+//        Thread.sleep(3000);
+        passwordField.sendKeys(password);
         loginButton.click();
         return new HomePage(driver);
 
@@ -80,9 +69,9 @@ public class LoginPage {
 
     }
 
-    public HomePage loginUsingKeyboardTabs(String username, String password)  {
+    public HomePage loginUsingKeyboardTabs(String username, String password) {
         Actions actions = new Actions(driver);
-        usernameFeild.sendKeys(username);
+        usernameField.sendKeys(username);
         actions.sendKeys(Keys.TAB)
                 .sendKeys(password)
                 .sendKeys(Keys.ENTER)
@@ -93,9 +82,7 @@ public class LoginPage {
 
     public boolean placeHolderValuesAreDisplayed() {
 
-        boolean userNameDisplayStatus= usernamePlaceholder.isDisplayed();
-        boolean passwordDisplayStatus= passwordPlaceholder.isDisplayed();
-        return userNameDisplayStatus & passwordDisplayStatus;
+    return usernamePlaceholder.isDisplayed() & passwordPlaceholder.isDisplayed();
 
     }
 
@@ -108,20 +95,15 @@ public class LoginPage {
 
     public String retrieveLoginPageTitle() {
 
-        String LoginPageTitle = driver.getTitle();
 
-
-        return LoginPageTitle;
+        return driver.getTitle();
     }
+
     public String retrieveLoginPageURL() {
 
-        String LoginPageURL = driver.getCurrentUrl();
-
-        return LoginPageURL;
+        return driver.getCurrentUrl();
 
     }
-
-
 
 
 }

@@ -27,7 +27,7 @@ public class FilterTest extends Base {
     public WebDriver driver;
 
     @BeforeMethod
-    public void setUp(){
+    public void setUp()throws InterruptedException{
         driver=initializeBrowserAndOpenApplicationURL(prop.getProperty("browserName"));
         loginPage = new LoginPage(driver);
         homePage= loginPage.Login(prop.getProperty("SValidUserName"),prop.getProperty("SValidPassword"));
